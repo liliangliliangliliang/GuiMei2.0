@@ -1,0 +1,150 @@
+﻿﻿body,p,form,input,button,dl,dt,dd,ul,ol,li,h1,h2,h3,h4 {
+    margin:0;
+    padding:0;
+    list-style:none
+}
+body{
+    margin:0;
+    padding:0;
+    background-color: snow;
+}
+
+.wrap .d1{
+    font-family: 宋体;
+    font-size: 12px;
+     height: 82px;
+    border: 1px #999999 solid;
+    background-color: white;
+
+ }
+.wrap .d2{
+    width: 849px;
+    height: 415px;
+    float: left;
+
+}
+.wrap .d3{
+    margin: 20px;
+    font-family: 宋体;
+    width: 400px;
+    height: 415px;
+    float: left;
+    background-color: white;
+    color: #999999;
+}
+.wrap .d4{
+    width: 1520px;
+    height: 42px;
+    clear:  left;
+}
+a{
+    font-size: 13px;
+
+}
+.d5{
+    position: relative;
+    top: -40px;
+    left: 1070px;
+    color: #999999;
+}
+.d6{
+    height: 82px;
+
+}
+
+.wrap .d2 div{
+    position: relative;
+    top: 60px;
+    left: 270px;
+}
+.wrap .d3 a{
+    position: relative;
+    left: 180px;
+}
+.wrap .d3 div{
+    position: relative;
+    top: 60px;
+    left: 20px;
+}
+ .d7,.d8{
+     margin-top: 12px;
+    width: 355px;
+    height: 50px;
+    border: 1px rgba(99,99,99,0.1) solid ;
+
+}
+ .d9{
+     border: 0px;
+     position: relative;
+     top: -20px;
+     font-size: 15px;
+
+ }
+ .d11{
+     /*position: relative;*/
+     /*left: 500px;*/
+ }
+.wrap .d12 input{
+    width: 355px;
+    height: 50px;
+    color: white;
+    font-size: 16px;
+    background-color:red;
+}
+.d10{
+    margin-top: 12px;
+    width: 355px;
+    height: 30px;
+}
+.d13 {
+    margin: 12px;
+    position: relative;
+    left: -20px;
+}
+.d14{
+    margin: 35px;
+    position: relative;
+    left: 540px;
+}
+.d15{
+    font-family: 篆书
+
+}
+.d16{
+
+    display: none;
+    position: relative;
+    left: -20px;
+    top: -40px;
+}
+
+.d18{
+    position: relative;
+    top: -58px;
+    left: 1270px;
+}
+.d19{
+    position: relative;
+    top: -52px;
+    left: 335px;
+}
+.d19:active~.d16{
+    display: block;
+}
+a{
+    text-decoration:none;
+}
+#err{
+    border: 1px red solid;
+}
+#ok{
+    border: 1px rgba(171,228,9,0.85) solid;
+}
+label{
+    font-size: 16px;
+    font-weight: bold;
+    color: red;
+    display: block;
+    position: relative;
+    top: -20px;
+}
