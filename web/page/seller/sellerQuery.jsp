@@ -16,7 +16,6 @@
                     <th>ID</th>
                     <th>姓名</th>
                     <th>登录账号</th>
-                    <th>密码</th>
                     <th>性别</th>
                     <th>生日</th>
                     <th>证件号</th>
@@ -30,7 +29,6 @@
                     <td>${sel.id}</td>
                     <td>${sel.sellerName}</td>
                     <td>${sel.sellerUser}</td>
-                    <td>${sel.sellerPassword}</td>
                     <td>${sel.sellerSex}</td>
                     <td>${sel.sellerBirthday}</td>
                     <td>${sel.sellerIdCard}</td>
