@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="../../js/jquery-2.1.0.js"></script>
 <script type="text/javascript" src="../../static/js/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="../../js/homepage.js"></script>
@@ -53,8 +54,24 @@
         </div>
 
         <div id="body_3">
-         	<div	id="announ" style="width:210px;height:55px;margin-top:44px;margin:50px 0 65px 10px;"></div>
-            <div class="b3dx" ></div>
+         	<div id="announ" style="width:210px;height:56px;margin-top:44px;margin:50px 0 65px 10px;">
+                <c:forEach items="${anns}" var="an">
+                    <tr>
+                        <td>${an.ATitle}</td>
+                        <td>${an.ADate}</td>
+                    </tr>
+                </c:forEach>
+            </div>
+            <div class="b3dx" >
+                <c:forEach items="${goodsList}" var="goods">
+                    <tr>
+                        <td>
+                            <img src="../../GoodsImage/${goods.goodsImage}" width="55px" height="55px">
+                        </td>
+                        <td>${goods.goodsName}</td>
+                    </tr><br/>
+                </c:forEach>
+            </div>
             <div style="width: 234px;height: 47px" onclick=congzi()  >
                 <img id="ad_img" style="margin-top: 6px;visibility:visible"  src="../../images/img/images/phono.jpg" >
             </div>

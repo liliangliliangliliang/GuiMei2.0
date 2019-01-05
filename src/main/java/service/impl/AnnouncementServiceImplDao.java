@@ -1,10 +1,18 @@
 package service.impl;
 
+import core.util.BaseDao;
 import dao.AllDao;
 import dao.impl.AllImplDao;
 import pojo.Announcement;
+import pojo.Bigclass;
+import pojo.Goods;
 import pojo.Page;
 import service.AnnouncementServiceDao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AnnouncementServiceImplDao implements AnnouncementServiceDao {
     private static AnnouncementServiceImplDao ourInstance = new AnnouncementServiceImplDao();
@@ -54,5 +62,30 @@ public class AnnouncementServiceImplDao implements AnnouncementServiceDao {
             return allDao.QueryName(sql,parameter);
         }
         return true;
+    }
+
+    public List<Announcement> annList() {
+        List<Announcement> announcements = new ArrayList<Announcement>();
+        String sql = "select * from announcement ORDER BY aDate DESC LIMIT 3 ";
+        return allDao.anQuery(sql,null);
+    }
+
+    public List<Goods> goodsList() {
+        List<Goods> goodsList = new ArrayList<Goods>();
+        String sql = "SELECT * FROM goods ORDER BY goodsOnShelfDate DESC LIMIT 4";
+        ResultSet rs = BaseDao.getQuery(sql,null);
+        try {
+            while (rs.next()){
+                Goods goods = new Goods();
+                goods.setGoodsName(rs.getString("goodsName"));
+                goods.setGoodsImage(rs.getString("goodsImage"));
+                goodsList.add(goods);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            BaseDao.dbClose();
+        }
+        return goodsList;
     }
 }

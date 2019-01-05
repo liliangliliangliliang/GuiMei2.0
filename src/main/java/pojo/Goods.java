@@ -1,6 +1,8 @@
 package pojo;
 
 
+import java.sql.Date;
+
 public class Goods {
 
   private long id;
@@ -13,6 +15,7 @@ public class Goods {
   private long goodsType;
   private long goodsSeId;
   private long goodsDiscId;
+  private Date goodsOnShelfDate;
 
 
   public long getId() {
@@ -104,4 +107,11 @@ public class Goods {
     this.goodsDiscId = goodsDiscId;
   }
 
+  public Date getGoodsOnShelfDate() {
+    return goodsOnShelfDate;
+  }
+
+  public void setGoodsOnShelfDate(Date goodsOnShelfDate) {
+    this.goodsOnShelfDate = goodsOnShelfDate;
+  }
 }

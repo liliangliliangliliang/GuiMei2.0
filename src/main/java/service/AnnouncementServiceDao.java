@@ -1,7 +1,10 @@
 package service;
 
 import pojo.Announcement;
+import pojo.Goods;
 import pojo.Page;
+
+import java.util.List;
 
 public interface AnnouncementServiceDao {
 
@@ -17,4 +20,10 @@ public interface AnnouncementServiceDao {
     int anDel(String id);
     //公共标题是否相同
     Boolean anName(String aTitle);
+
+    // 查询最新的3条公告
+    List<Announcement> annList();
+
+    // 查询最新的4件商品
+    List<Goods> goodsList();
 }

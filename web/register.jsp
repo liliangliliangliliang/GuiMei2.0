@@ -22,6 +22,7 @@
         $("#errorpwd").css("color","red")
     })
 </script>
+
 <body id="zhuce1">
     <div style="width: 490px;height: 550px;float: left;">
 		<form id="formSub" action="doCus?action=regCus" method="post"  enctype="multipart/form-data">
@@ -81,10 +82,10 @@
 				</tr>
 				<tr>
 					<td class="text1">身份证号：</td>
-					<td><input type="text"  class="easyui-validatebox" data-options="required:true" name="C_code" disabled="false"></td>
+					<td><input type="text"  class="easyui-validatebox" data-options="required:true" name="C_code"></td>
 				</tr>
 				<tr>
-					<td colspan="2" style="text-align: center;height: 34px;">
+					<td colspan="2" style="text-align: center;height: 34px;" id="sub" readonly>
 						<input type="image" src="images/img/zhuce/submit.gif" style="float:left;margin-left:75px">
 						<input type="reset" value=" " style="background-image: url('images/img/zhuce/reset.gif');background-repeat:no-repeat; border:0px;width:80px;height:34px;float:left;" >
 					</td>
@@ -137,7 +138,7 @@
 2、本协议终止后，不影响您因在本协议终止前的行为应承担的义务和责任。
 七、本协议的解释权归北京网信贵美商城络科技有限公司所有。
 		</textarea><br>
-		<input type="checkbox" style="margin:15px 0 0 50px;" name="clause">&nbsp;我同意以上协议内容
+		<input type="checkbox" style="margin:15px 0 0 50px;" name="clause" id="clause">&nbsp;我同意以上协议内容
 	</div>
 </body>
 </html>

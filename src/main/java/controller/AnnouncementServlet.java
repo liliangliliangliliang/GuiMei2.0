@@ -13,13 +13,15 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.List;
 
 @WebServlet(name = "AnnouncementServlet",urlPatterns = "/doAn")
 public class AnnouncementServlet extends HttpServlet {
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
     }
-
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
@@ -89,6 +91,12 @@ public class AnnouncementServlet extends HttpServlet {
             }else {
                 out.print("添加失败");
             }
+        }
+
+        if(action!=null && action.equals("anns")){
+            session.setAttribute("anns",anService.annList());
+            session.setAttribute("goodsList",anService.goodsList());
+            request.getRequestDispatcher("Customer/GUIMEI/homepage.jsp").forward(request,response);
         }
     }
 }
