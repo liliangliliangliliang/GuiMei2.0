@@ -22,4 +22,8 @@ public interface CustomerServiceDao {
     int cusAdd(Customer cus);
     //根据ID删除顾客
     int cusDelById(String id);
+    // 顾客注册
+    boolean addCus(Customer customer);
+    // 注销
+    boolean delCus(long id);
 }

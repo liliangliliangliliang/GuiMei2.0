@@ -58,7 +58,7 @@ public class UploadFile {
                     }else {
                         if(fileName.length()>0){
                             map.put(fileKey,fileName);
-                            item.write(new File(path + "/" + fileName));
+                            //item.write(new File(path + "/" + fileName));
                         }else {
                             map.put(fileKey,"");
                         }

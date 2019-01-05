@@ -12,18 +12,62 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.Map;
 
 @WebServlet(name = "CustomerServlet",urlPatterns = "/doCus")
 public class CustomerServlet extends HttpServlet {
+    private CustomerServiceImplDao cusService=CustomerServiceImplDao.getInstance();
     private String id;
     private String cusName;
     private String cusSex;
-
+    String cpwd2;
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html;charset=utf-8");
+        PrintWriter out=response.getWriter();
+        HttpSession session=request.getSession();
+        String action=request.getParameter("action");
+
+        // 顾客注册
+        if(action!=null && action.equals("regCus")){
+            String cusPath = "/CusImage";
+
+            Map<String,String> map = UploadFile.uploadUtil(cusPath,request,1024*1024*100L,"C_hobby");
+            System.out.println(map);
+            Customer customer = new Customer();
+            customer.setCusName(map.get("C_name"));
+            customer.setCusLoginName(map.get("C_loginName"));
+            customer.setCusPassword(map.get("C_pwd"));
+            if(map.get("C_pwd").equals(map.get("C_pwd2"))){
+                customer.setCusPassword(map.get("C_pwd"));
+            }else {
+                session.setAttribute("errorPwd","2次输入密码不一致");
+                response.sendRedirect("register.jsp");
+                return;
+            };
+            customer.setCusEmail(map.get("C_email"));
+            customer.setCusSex(map.get("C_sex"));
+            customer.setCusPhoto(map.get("C_photo"));
+            customer.setCusHobby(map.get("C_hobby"));
+            //String birth1 = map.get("C_birthday");
+
+            customer.setCusBirthday(Date.valueOf(map.get("C_birthday")));
+            customer.setCusCode(map.get("C_code"));
+            if(cusService.addCus(customer)){
+                request.getRequestDispatcher("cusLog.jsp").forward(request,response);
+            }else {
+                session.setAttribute("errorReg","注册失败");
+                response.sendRedirect("register.jsp");
+            }
+        }
         doGet(request,response);
     }
-
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
@@ -32,14 +76,14 @@ public class CustomerServlet extends HttpServlet {
         HttpSession session=request.getSession();
         String action=request.getParameter("action");
         String path=request.getContextPath()+"/";
-        CustomerServiceImplDao cusService=CustomerServiceImplDao.getInstance();
+
         int pageSize=5;
 
 
 
 
         //顾客登录
-        if(action!=null && action.equals("cusLogin")){
+        /*if(action!=null && action.equals("cusLogin")){
             String cusLoginName=request.getParameter("cusLoginName");
             String cusPassword=MD5Util.toMD5(request.getParameter("cusPassword"));
             String flag=request.getParameter("forGetPwd");
@@ -60,7 +104,7 @@ public class CustomerServlet extends HttpServlet {
                 request.setAttribute("login","输入的账号或密码有误");
                 request.getRequestDispatcher(path+"CusLogin.jsp").forward(request,response);
             }
-        }
+        }*/
 
 
         //查询所有顾客
@@ -186,6 +230,22 @@ public class CustomerServlet extends HttpServlet {
                 out.print("密码重置失败");
             }
         }
+
+        // 顾客登录
+        if(action!=null && action.equals("login")){
+            String cusLoginName = request.getParameter("C_loginName");
+            String cusPwd = request.getParameter("C_pwd");
+            Customer customer = cusService.cusLogin(cusLoginName,cusPwd);
+
+            if(customer.getCusLoginName()!=null){
+                session.setAttribute("customer",customer);
+                response.sendRedirect("Customer/GUIMEI/homepage.jsp");
+            }else{
+                session.setAttribute("error","您输入的用户名和密码错误");
+                response.sendRedirect("cusLog.jsp");
+            }
+        }
+
 
     }
 }

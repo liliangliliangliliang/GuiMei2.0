@@ -85,10 +85,16 @@ public class CustomerServiceImplDao implements CustomerServiceDao {
     }
 
     public Customer cusLogin(String cusLoginName, String cusPassword) {
+        sql = "SELECT * FROM customer WHERE cusLoginName=? AND cusPassword=?";
+        parameter = new Object[]{cusLoginName,cusPassword};
+        return allDao.cusQuery(sql,parameter);
+    }
+
+    /*public Customer cusLogin(String cusLoginName, String cusPassword) {
         sql="select * from customer where cusLoginName=? and cusPassword=?";
         parameter=new Object[]{cusLoginName,cusPassword};
         return allDao.cusQuery(sql,parameter);
-    }
+    }*/
 
     //修改一个顾客信息
     public int cusUpdate(Customer cus) {
@@ -117,5 +123,28 @@ public class CustomerServiceImplDao implements CustomerServiceDao {
         sql="delete from customer where id=?";
         parameter=new Object[]{id};
         return allDao.cusUpdate(sql,parameter);
+    }
+
+    public boolean addCus(Customer customer) {
+        sql = "INSERT INTO customer VALUES(0,?,?,?,?,?,?,?,?,?)";
+        parameter=new Object[]{customer.getCusName(),customer.getCusLoginName(),
+        customer.getCusPassword(), customer.getCusEmail(),customer.getCusSex(),
+                customer.getCusPhoto(),customer.getCusHobby(),
+        customer.getCusCode(),customer.getCusBirthday()};
+        int result = allDao.cusUpdate(sql,parameter);
+        if(result>0){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean delCus(long id) {
+        sql = "delete from customer where id=?";
+        parameter=new Object[]{id};
+        int result = allDao.cusUpdate(sql,parameter);
+        if(result>0){
+            return true;
+        }
+        return false;
     }
 }
